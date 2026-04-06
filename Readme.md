@@ -108,3 +108,8 @@ Pohon akan melakukan rotasi jika $|BF| > 1$:
 >     
 
 👀 Youtube
+1. Java
+   [![Demo Project Java]](https://youtu.be/6Y6s7rKCUrQ)
+2. Python
+   [![Demo Project Python]](https://youtu.be/CWd-nIr1SGQ)
+
