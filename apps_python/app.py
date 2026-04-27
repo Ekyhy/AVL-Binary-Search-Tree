@@ -102,23 +102,25 @@ class AVLTree:
         return root
     
     def inorder(self, root, res):
-        if root : 
-            self.inorder(root.left, res)
-            res.append({'id' : root.id, 'nama': root.nama})
-            self.inorder(root.right,res)
+            if root: 
+                self.inorder(root.left, res)
+                res.append({'id' : root.id, 'nama': root.nama})
+                self.inorder(root.right,res)
 
     def preorder(self, root, res):
-        if root:
-            res.append(str(root.id))
-            self.preorder(root.left, res)
-            self.preorder(root.right, res)
+            if root:
+                # Ubah agar memasukkan ID dan Nama
+                res.append({'id' : root.id, 'nama': root.nama})
+                self.preorder(root.left, res)
+                self.preorder(root.right, res)
 
     def postorder(self, root, res):
-        if root:
-            self.postorder(root.left, res)
-            self.postorder(root.right, res)
-            res.append(str(root.id))
-
+            if root:
+                self.postorder(root.left, res)
+                self.postorder(root.right, res)
+                # Ubah agar memasukkan ID dan Nama
+                res.append({'id' : root.id, 'nama': root.nama})
+                
     def generate_mermaid(self, root, lines=None):
         if lines is None: lines = []
         if root:
@@ -147,20 +149,31 @@ except Exception as e:
     print(f"Gagal memuat Excel: {e}")
 
 @app.route('/')
+@app.route('/')
 def index():
     in_order, pre_order, post_order = [], [], []
     tree.inorder(root, in_order)
     tree.preorder(root, pre_order)
     tree.postorder(root, post_order)
 
-    graph = " graph TD\n " + tree.generate_mermaid(root)
-    return render_template( 'index.html',
-                            data = in_order,
-                            pre=", ".join(pre_order),
-                            post=", ".join(post_order),
-                            mermaid_graph =  graph,
-                            height= tree.get_height(root))
+    # Mengambil nilai pilihan traversal dari URL, default ke 'inorder'
+    traversal_type = request.args.get('traversal', 'inorder')
 
+    # Menentukan data mana yang akan dikirim ke tabel web
+    if traversal_type == 'preorder':
+        data_to_show = pre_order
+    elif traversal_type == 'postorder':
+        data_to_show = post_order
+    else:
+        data_to_show = in_order
+
+    graph = " graph TD\n " + tree.generate_mermaid(root)
+    
+    return render_template('index.html',
+                        data=data_to_show,
+                        traversal_type=traversal_type,
+                        mermaid_graph=graph,
+                        height=tree.get_height(root))
 @app.route('/add', methods=['POST'])
 
 def add():

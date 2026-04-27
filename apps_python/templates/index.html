@@ -42,22 +42,23 @@
                         <button type="submit" class="btn btn-success w-100">Tambah</button>
                     </form>
                 </div>
-
-                <div class="card shadow-sm">
-                    <div class="card-header">Traversal Path</div>
-                    <div class="card-body">
-                        <h6>Pre-Order:</h6> <p class="small text-break text-primary">{{ pre }}</p>
-                        <h6>Post-Order:</h6> <p class="small text-break text-success">{{ post }}</p>
-                    </div>
-                </div>
             </div>
 
-            <div class="col-md-8">
+<div class="col-md-8">
                 <div class="card shadow-sm">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        Daftar Data (In-Order)
-                        <input type="text" id="searchBox" onkeyup="filterTable()" class="form-control form-control-sm w-50" placeholder="Cari ID atau Nama...">
+                    <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                        
+                        <form action="/" method="GET" class="mb-0 w-100 w-md-auto">
+                            <select name="traversal" id="traversal" onchange="this.form.submit()" class="form-select form-select-sm fw-bold border-0 bg-transparent shadow-none" style="cursor: pointer;">
+                                <option value="inorder" {% if traversal_type == 'inorder' %}selected{% endif %}>Daftar Data (In-Order)</option>
+                                <option value="preorder" {% if traversal_type == 'preorder' %}selected{% endif %}>Daftar Data (Pre-Order)</option>
+                                <option value="postorder" {% if traversal_type == 'postorder' %}selected{% endif %}>Daftar Data (Post-Order)</option>
+                            </select>
+                        </form>
+
+                        <input type="text" id="searchBox" onkeyup="filterTable()" class="form-control form-control-sm w-100 w-md-50" placeholder="Cari ID atau Nama...">
                     </div>
+                    
                     <div class="card-body p-0" style="max-height: 600px; overflow-y: auto;">
                         <table class="table table-hover mb-0" id="treeTable">
                             <thead class="table-dark sticky-top">
