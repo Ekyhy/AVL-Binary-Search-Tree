@@ -77,9 +77,13 @@ Pohon akan melakukan rotasi jika $|BF| > 1$:
 
 ### Menjalankan Versi Python
 
-1.  Bashpip install flask pandas openpyxl
+1.  ```bash
+    pip install flask pandas openpyxl
+    ```
     
-2.  Bashpython app.py
+2.  ```bash
+    python app.py
+    ```
     
 3.  Akses di browser: http://127.0.0.1:5000
     
