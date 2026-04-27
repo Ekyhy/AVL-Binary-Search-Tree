@@ -53,20 +53,6 @@ Proyek ini tersedia dalam dua varian implementasi:
 *   **IDE**: VS Code (Extension Pack for Java)
     
 
-🏗️ Struktur Proyek
--------------------
-
-### Python Implementation
-
-Plaintext
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   project_python/  ├── app.py              # Logika AVL, Traversal, dan Flask Routes  ├── data100.xlsx        # Sumber data input 100 data  └── templates/      └── index.html      # UI Dashboard & Script Mermaid.js   `
-
-### Java Implementation
-
-Plaintext
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   project_java/  ├── pom.xml             # Konfigurasi Maven (Apache POI)  └── src/main/java/com/ekyhy/app/      ├── Node.java           # Struktur data simpul      ├── AVLTree.java        # Logika rotasi & algoritma      ├── App.java            # Main menu console (Manual Input)      └── AVLVisualizer.java  # GUI JFrame & Visualisasi Grafis   `
 
 📖 Logika Algoritma AVL
 -----------------------
@@ -122,3 +108,8 @@ Pohon akan melakukan rotasi jika $|BF| > 1$:
 >     
 
 👀 Youtube
+1. Java
+   [![Demo Project Java]](https://youtu.be/6Y6s7rKCUrQ)
+2. Python
+   [![Demo Project Python]](https://youtu.be/CWd-nIr1SGQ)
+
