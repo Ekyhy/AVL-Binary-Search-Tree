@@ -1,30 +1,13 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class AVLTree {
 
-class Node {
-    int id;
-    String nama;
-    Node left, right;
-    int height;
-
-    public Node(int id, String nama) {
-        this.id = id;
-        this.nama = nama;
-        this.height = 1;
-    }
-}
-
-class AVLTree {
-    public int getHeight(Node n){
+    public int getHeight(Node n) {
         return (n == null) ? 0 : n.height;
     }
 
-    public int getBalance(Node n){
+    public int getBalance(Node n) {
         return (n == null) ? 0 : getHeight(n.left) - getHeight(n.right);
     }
 
-    // Rotasi Kanan
     private Node rotateRight(Node y) {
         Node x = y.left;
         Node T2 = x.right;
@@ -35,7 +18,6 @@ class AVLTree {
         return x;
     }
 
-    // Rotasi Kiri
     private Node rotateLeft(Node x) {
         Node y = x.right;
         Node T2 = y.left;
@@ -46,7 +28,6 @@ class AVLTree {
         return y;
     }
 
-    // Tambah Data
     public Node insert(Node node, int id, String nama) {
         if (node == null) return new Node(id, nama);
 
@@ -55,12 +36,11 @@ class AVLTree {
         else if (id > node.id)
             node.right = insert(node.right, id, nama);
         else
-            return node; // ID duplikat tidak diizinkan
+            return node;
 
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
         int balance = getBalance(node);
 
-        // Balancing
         if (balance > 1 && id < node.left.id) return rotateRight(node);
         if (balance < -1 && id > node.right.id) return rotateLeft(node);
         if (balance > 1 && id > node.left.id) {
@@ -74,7 +54,6 @@ class AVLTree {
         return node;
     }
 
-    // Hapus Data
     public Node delete(Node root, int id) {
         if (root == null) return root;
 
@@ -95,6 +74,7 @@ class AVLTree {
         }
 
         if (root == null) return root;
+
         root.height = 1 + Math.max(getHeight(root.left), getHeight(root.right));
         int balance = getBalance(root);
 
@@ -117,31 +97,29 @@ class AVLTree {
         return current;
     }
 
-    // Traversal In-order
-    public void inorder(Node root, List<Map<String, Object>> res) {
+    // --- FUNGSI TRAVERSAL ---
+
+    public void preorder(Node root, StringBuilder res) {
+        if (root != null) {
+            res.append(root.id).append(" (").append(root.nama).append("), ");
+            preorder(root.left, res);
+            preorder(root.right, res);
+        }
+    }
+
+    public void inorder(Node root, StringBuilder res) {
         if (root != null) {
             inorder(root.left, res);
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", root.id);
-            map.put("nama", root.nama);
-            res.add(map);
+            res.append(root.id).append(" (").append(root.nama).append("), ");
             inorder(root.right, res);
         }
     }
 
-    // Visualisasi Mermaid
-    public void generateMermaid(Node root, List<String> lines) {
+    public void postorder(Node root, StringBuilder res) {
         if (root != null) {
-            String cleanNama = root.nama.replaceAll("[^a-zA-Z0-9 ]", "");
-            String curr = "n" + root.id + "[\"ID: " + root.id + " | " + cleanNama + "\"]";
-            if (root.left != null) {
-                lines.add(curr + " --> n" + root.left.id + "[\"ID: " + root.left.id + " | " + root.left.nama + "\"]");
-                generateMermaid(root.left, lines);
-            }
-            if (root.right != null) {
-                lines.add(curr + " --> n" + root.right.id + "[\"ID: " + root.right.id + " | " + root.right.nama + "\"]");
-                generateMermaid(root.right, lines);
-            }
+            postorder(root.left, res);
+            postorder(root.right, res);
+            res.append(root.id).append(" (").append(root.nama).append("), ");
         }
     }
 }
